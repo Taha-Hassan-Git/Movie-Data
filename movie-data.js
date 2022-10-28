@@ -35,34 +35,37 @@ let movieData = {
   };
 
 function objectMapping() {
-  //creating elements we need
-  const newCard = document.createElement("div");
-  const newTitle = document.createElement("h1");
-  const newSummary = document.createElement("p");
-  const newCast = document.createElement("p");
-  const newRuntime = document.createElement("p");
-  const newRating = document.createElement("p");
-  const newYear = document.createElement("p");
-  //setting the content of the elements
-  const title = Object.keys(movieData)[0];
-  newTitle.innerHTML = title;
-  newSummary.innerHTML = movieData["The Darjeeling Limited"].plot;
-  newCast.innerHTML = movieData["The Darjeeling Limited"].cast;
-  newRuntime.innerHTML = movieData["The Darjeeling Limited"].runtime;
-  newRating.innerHTML = movieData["The Darjeeling Limited"].rating;
-  newYear.innerHTML = movieData["The Darjeeling Limited"].year;
-  //putting in class and id fields
-  newCard.classList.add("card");
-  //appending elements to div
-  newCard.appendChild(newTitle);
-  newCard.appendChild(newSummary);
-  newCard.appendChild(newCast);
-  newCard.appendChild(newRuntime);
-  newCard.appendChild(newRating);
-  newCard.appendChild(newYear);
-  //appending to document
-  const movieSection = document.getElementById("moviesection");
-  const movies = document.getElementById("movies");
-  movieSection.insertBefore(newCard, movies);
+  for (const movie in movieData){
+    //creating elements we need
+    const newCard = document.createElement("div");
+    const newTitle = document.createElement("h1");
+    const newSummary = document.createElement("p");
+    const newCast = document.createElement("p");
+    const newRuntime = document.createElement("p");
+    const newRating = document.createElement("p");
+    const newYear = document.createElement("p");
+    //setting the content of the elements
+    const title = movie
+    
+    newTitle.innerHTML = title;
+    newSummary.innerHTML = movieData[movie].plot;
+    newCast.innerHTML = movieData[movie].cast;
+    newRuntime.innerHTML = movieData[movie].runtime;
+    newRating.innerHTML = movieData[movie].rating;
+    newYear.innerHTML = movieData[movie].year;
+    //putting in class and id fields
+    newCard.classList.add("card");
+    //appending elements to div
+    newCard.appendChild(newTitle);
+    newCard.appendChild(newSummary);
+    newCard.appendChild(newCast);
+    newCard.appendChild(newRuntime);
+    newCard.appendChild(newRating);
+    newCard.appendChild(newYear);
+    //appending to document
+    const movieSection = document.getElementById("moviesection");
+    const movies = document.getElementById("movies");
+    movieSection.insertBefore(newCard, movies);
+  }
 }
 objectMapping();
