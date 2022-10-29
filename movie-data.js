@@ -37,7 +37,7 @@ let movieData = {
 function objectMapping() {
   for (const movie in movieData){
     //creating elements we need
-    const newCard = document.createElement("div");
+    const newCard = document.createElement("card");
     const newTitle = document.createElement("h1");
     const newSummary = document.createElement("p");
     const newCast = document.createElement("p");
@@ -67,11 +67,9 @@ function objectMapping() {
     newRating.innerHTML = movieData[movie].rating;
     newYear.innerHTML = movieData[movie].year;
     //appending elements to div
-    //there must be a way to iterate over this!!
     for (const i in elementsArray){
       newCard.appendChild(elementsArray[i])
     }
-   
     //appending to document
     const movieSection = document.getElementById("moviesection");
     const movies = document.getElementById("movies");
