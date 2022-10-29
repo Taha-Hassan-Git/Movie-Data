@@ -44,10 +44,12 @@ function objectMapping() {
     const newRuntime = document.createElement("p");
     const newRating = document.createElement("p");
     const newYear = document.createElement("p");
-    const newButton = document.createElement("button");
+    const newEditButton = document.createElement("button");
+    const newSeenButton = document.createElement("input");
+    const newLabel = document.createElement("label");
     //putting in class and id fields
     //Class fields
-    const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear, newButton];
+    const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear, newEditButton, newSeenButton, newLabel];
     newCard.classList.add("card");
     for (const i in elementsArray){
       addingClass(elementsArray[i], movie)
@@ -61,10 +63,14 @@ function objectMapping() {
     newRuntime.id = "runtime";
     newRating.id = "rating";
     newYear.id = "year";
-    newButton.id = "edit";
-    newButton.name = movie;
+    newEditButton.id = "edit";
+    newEditButton.name = movie;
+    newSeenButton.id = "seen" + movie;
+    newSeenButton.name = movie;
+    newSeenButton.type = "checkbox";
+    newLabel.for = "seen" + movie;
     //adds onclick function to button
-    newButton.setAttribute("onclick","editButton(this)");
+    newEditButton.setAttribute("onclick","editButton(this)");
     //setting the content of the elements
     const title = movie;
     newTitle.innerHTML = title;
@@ -73,7 +79,8 @@ function objectMapping() {
     newRuntime.innerHTML = movieData[movie].runtime;
     newRating.innerHTML = movieData[movie].rating;
     newYear.innerHTML = movieData[movie].year;
-    newButton.innerHTML = "Edit";
+    newEditButton.innerHTML = "Edit";
+    newLabel.innerHTML = "Seen";
     //appending elements to div
     for (const i in elementsArray){
       newCard.appendChild(elementsArray[i])
