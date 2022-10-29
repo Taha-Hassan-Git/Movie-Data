@@ -44,24 +44,34 @@ function objectMapping() {
     const newRuntime = document.createElement("p");
     const newRating = document.createElement("p");
     const newYear = document.createElement("p");
+    //putting in class and id fields
+    //Class fields
+    const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear];
+    newCard.classList.add("card");
+    for (const i in elementsArray){
+      addingClass(elementsArray[i], movie)
+    }
+    //id fields
+    newTitle.id = "Title";
+    newSummary.id = "plot";
+    newCast.id = "cast";
+    newRuntime.id = "runtime";
+    newRating.id = "rating";
+    newYear.id = "year";
     //setting the content of the elements
-    const title = movie
-    
+    const title = movie;
     newTitle.innerHTML = title;
     newSummary.innerHTML = movieData[movie].plot;
     newCast.innerHTML = movieData[movie].cast;
     newRuntime.innerHTML = movieData[movie].runtime;
     newRating.innerHTML = movieData[movie].rating;
     newYear.innerHTML = movieData[movie].year;
-    //putting in class and id fields
-    newCard.classList.add("card");
     //appending elements to div
-    newCard.appendChild(newTitle);
-    newCard.appendChild(newSummary);
-    newCard.appendChild(newCast);
-    newCard.appendChild(newRuntime);
-    newCard.appendChild(newRating);
-    newCard.appendChild(newYear);
+    //there must be a way to iterate over this!!
+    for (const i in elementsArray){
+      newCard.appendChild(elementsArray[i])
+    }
+   
     //appending to document
     const movieSection = document.getElementById("moviesection");
     const movies = document.getElementById("movies");
@@ -69,3 +79,7 @@ function objectMapping() {
   }
 }
 objectMapping();
+
+function addingClass(element, movie) {
+  element.classList.add(movie.replace(/\s/g, ''))
+}
