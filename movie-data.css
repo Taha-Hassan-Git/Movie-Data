@@ -3,11 +3,11 @@
     --color2: #C7EDD9;
     --color3: #A19887;
     --color4: #ECE7DE;
-    --color5: #9A8FA1;
+    --color5: #a180b5;
 }
 
 body {
-    background: var(--color2);
+    background: var(--color4);
 }
 
 .container {
@@ -24,7 +24,7 @@ body {
     margin-top: 10px;
     font-size: 25px;
     font-family: 'Courier New', Courier, monospace;
-    background-color: var(--color4);
+    background-color: var(--color1);
     padding: 20px;
     border: 2px solid black;
     border-radius: 5%;
@@ -34,6 +34,37 @@ body {
     -ms-border-radius: 5%;
     -o-border-radius: 5%;
 }
+
+.moviedata {
+    display: block;
+}
+
+button {
+    background-color: var(--color4);
+    border: 2px solid black;
+    color: black;
+    padding: 5px 8px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+    margin-bottom: 10px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 10%;
+    -webkit-border-radius: 10%;
+    -moz-border-radius: 10%;
+    -ms-border-radius: 10%;
+    -o-border-radius: 10%;
+  }
+  
+    button:hover:enabled {
+        background-color: var(--color2);
+        padding: 8px 17px;
+    }
+    button:disabled {
+        background-color: var(--color1);
+
+    }
 
 @media only screen and (max-width: 800px) {
     .card {
@@ -46,3 +77,4 @@ body {
     .card {
         max-width: 600px;
     }
+}

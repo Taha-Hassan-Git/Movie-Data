@@ -44,20 +44,27 @@ function objectMapping() {
     const newRuntime = document.createElement("p");
     const newRating = document.createElement("p");
     const newYear = document.createElement("p");
+    const newButton = document.createElement("button");
     //putting in class and id fields
     //Class fields
-    const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear];
+    const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear, newButton];
     newCard.classList.add("card");
     for (const i in elementsArray){
       addingClass(elementsArray[i], movie)
     }
     //id fields
+    //the card is getting the movie title as its id because it's not accepting it as a class for some reason.
+    newCard.id = movie.replace(/\s/g, '')
     newTitle.id = "Title";
     newSummary.id = "plot";
     newCast.id = "cast";
     newRuntime.id = "runtime";
     newRating.id = "rating";
     newYear.id = "year";
+    newButton.id = "edit";
+    newButton.name = movie;
+    //adds onclick function to button
+    newButton.setAttribute("onclick","editButton(this)");
     //setting the content of the elements
     const title = movie;
     newTitle.innerHTML = title;
@@ -66,6 +73,7 @@ function objectMapping() {
     newRuntime.innerHTML = movieData[movie].runtime;
     newRating.innerHTML = movieData[movie].rating;
     newYear.innerHTML = movieData[movie].year;
+    newButton.innerHTML = "Edit";
     //appending elements to div
     for (const i in elementsArray){
       newCard.appendChild(elementsArray[i])
@@ -79,5 +87,11 @@ function objectMapping() {
 objectMapping();
 
 function addingClass(element, movie) {
+  //adds the title of the movie to the classlist without spaces
   element.classList.add(movie.replace(/\s/g, ''))
+}
+
+function editButton(card) {
+  //transforms to edit mode
+  console.log(card.name)
 }
