@@ -48,6 +48,7 @@ function objectMapping() {
     const newSeenButton = document.createElement("input");
     const newLabel = document.createElement("label");
     //putting in class and id fields
+    //
     //Class fields
     const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear, newEditButton, newSeenButton, newLabel];
     newCard.classList.add("card");
@@ -69,8 +70,9 @@ function objectMapping() {
     newSeenButton.name = movie;
     newSeenButton.type = "checkbox";
     newLabel.for = "seen" + movie;
-    //adds onclick function to button
+    //adds onclick function to button and checkbox
     newEditButton.setAttribute("onclick","editButton(this)");
+    newSeenButton.setAttribute("onclick", "isSeen(this)");
     //setting the content of the elements
     const title = movie;
     newTitle.innerHTML = title;
@@ -98,7 +100,22 @@ function addingClass(element, movie) {
   element.classList.add(movie.replace(/\s/g, ''))
 }
 
+
 function editButton(card) {
   //transforms to edit mode
   console.log(card.name)
+}
+
+//function for changing the display when a film has been seen
+function isSeen(seenBox) {
+  //identifies the correct checkbox by using the button's name field
+  const seenButton = document.getElementById("seen" + seenBox.name);
+  //identifies the corresponding card by using the checkbox's class field
+  const seenCard = document.getElementById(seenButton.classList);
+  //changes the background colour depending on whether the box is checked
+  if (seenButton.checked == true){
+    seenCard.style.backgroundColor = "var(--color2)";
+  } else {
+    seenCard.style.backgroundColor = "var(--color1)";
+  }
 }
