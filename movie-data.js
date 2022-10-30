@@ -64,7 +64,7 @@ function objectMapping() {
     newRuntime.id = "runtime";
     newRating.id = "rating";
     newYear.id = "year";
-    newEditButton.id = "edit";
+    newEditButton.id = "edit" + movie;
     newEditButton.name = movie;
     newSeenButton.id = "seen" + movie;
     newSeenButton.name = movie;
@@ -103,11 +103,21 @@ function addingClass(element, movie) {
 
 function editButton(card) {
   //transforms to edit mode
-  console.log(card.name)
+  const button = document.getElementById("edit" + card.name);
+  const editCard = document.getElementById(button.classList);
+  console.log(editCard);
+  //remove old elements
+
+  //generate new input fields and save button
+
+  //populate with data
+  
+  //append to the document
 }
 
-//function for changing the display when a film has been seen
+
 function isSeen(seenBox) {
+  //function for changing the display when a film has been seen
   //identifies the correct checkbox by using the button's name field
   const seenButton = document.getElementById("seen" + seenBox.name);
   //identifies the corresponding card by using the checkbox's class field
