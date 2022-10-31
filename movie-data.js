@@ -105,14 +105,26 @@ function editButton(card) {
   //transforms to edit mode
   const button = document.getElementById("edit" + card.name);
   const editCard = document.getElementById(button.classList);
-  console.log(editCard);
-  //remove old elements
-
+  const oldElements = document.getElementsByClassName(editCard.id);
   //generate new input fields and save button
-
+  const titleInput = document.createElement("input");
+  const plotInput = document.createElement("input");
+  const castInput = document.createElement("input");
+  const runtimeInput = document.createElement("input");
+  const ratingInput = document.createElement("input");
+  const yearInput = document.createElement("input");
+  const newInputsArray = [titleInput, plotInput, castInput, runtimeInput, ratingInput, yearInput]
   //populate with data
+  for (const i in newInputsArray){
+    newInputsArray[i].value = oldElements[i].innerHTML
+    editCard.appendChild(newInputsArray[i]);
+  }
+  //remove old elements
   
-  //append to the document
+  while (oldElements.length >0) oldElements[0].remove();
+  
+  //append inputs to the document
+
 }
 
 
