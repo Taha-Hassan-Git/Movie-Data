@@ -33,6 +33,11 @@ body {
     -moz-border-radius: 5%;
     -ms-border-radius: 5%;
     -o-border-radius: 5%;
+    
+}
+
+.card:hover {
+    outline: #A19887 solid 10px;
 }
 
 .moviedata {

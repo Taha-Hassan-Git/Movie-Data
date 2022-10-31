@@ -51,12 +51,14 @@ function objectMapping() {
     //
     //Class fields
     const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear, newEditButton, newSeenButton, newLabel];
+    //the card is getting the movie title as its id and not class because we later want to remove other elements when editing
     newCard.classList.add("card");
+
     for (const i in elementsArray){
       addingClass(elementsArray[i], movie)
     }
-    //id fields
-    //the card is getting the movie title as its id because it's not accepting it as a class for some reason.
+
+    // Adding id, name and for fields
     newCard.id = movie.replace(/\s/g, '')
     newTitle.id = "Title";
     newSummary.id = "plot";
@@ -70,9 +72,11 @@ function objectMapping() {
     newSeenButton.name = movie;
     newSeenButton.type = "checkbox";
     newLabel.for = "seen" + movie;
-    //adds onclick function to button and checkbox
+
+    //adding onclick function to button and checkbox
     newEditButton.setAttribute("onclick","editButton(this)");
     newSeenButton.setAttribute("onclick", "isSeen(this)");
+
     //setting the content of the elements
     const title = movie;
     newTitle.innerHTML = title;
@@ -83,6 +87,7 @@ function objectMapping() {
     newYear.innerHTML = movieData[movie].year;
     newEditButton.innerHTML = "Edit";
     newLabel.innerHTML = "Seen";
+
     //appending elements to div
     for (const i in elementsArray){
       newCard.appendChild(elementsArray[i])
@@ -93,6 +98,7 @@ function objectMapping() {
     movieSection.insertBefore(newCard, movies);
   }
 }
+
 objectMapping();
 
 function addingClass(element, movie) {
@@ -114,17 +120,13 @@ function editButton(card) {
   const ratingInput = document.createElement("input");
   const yearInput = document.createElement("input");
   const newInputsArray = [titleInput, plotInput, castInput, runtimeInput, ratingInput, yearInput]
-  //populate with data
+  //populate with data and append to card
   for (const i in newInputsArray){
     newInputsArray[i].value = oldElements[i].innerHTML
     editCard.appendChild(newInputsArray[i]);
   }
   //remove old elements
-  
   while (oldElements.length >0) oldElements[0].remove();
-  
-  //append inputs to the document
-
 }
 
 
