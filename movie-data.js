@@ -59,7 +59,7 @@ function objectMapping() {
     }
 
     // Adding id, name and for fields
-    newCard.id = movie.replace(/\s/g, '')
+    newCard.id = movie.replace(/\s/g, '');
     newTitle.id = "Title";
     newSummary.id = "plot";
     newCast.id = "cast";
@@ -99,8 +99,6 @@ function objectMapping() {
   }
 }
 
-objectMapping();
-
 function addingClass(element, movie) {
   //adds the title of the movie to the classlist without spaces
   //called by objectMapping
@@ -115,34 +113,54 @@ function editButton(card) {
   const editCard = document.getElementById(button.classList);
   const oldElements = document.getElementsByClassName(editCard.id);
   //generate new input fields and save button
-  const newForm = document.createElement("form"); 
   
+  const newForm = document.createElement("form"); 
   const submitButton = document.createElement("button");
+
   for (let i = 0; i < 6; i++){
     newInput = document.createElement("input");
+    br = document.createElement("br")
     newInput.value = oldElements[i].innerHTML
+    newInput.classList.add("input");
+    newInput.id = card.name;
     newForm.appendChild(newInput);
+    newForm.appendChild(br)
   }
-  /* const titleInput = document.createElement("input");
-  const plotInput = document.createElement("input");
-  const castInput = document.createElement("input");
-  const runtimeInput = document.createElement("input");
-  const ratingInput = document.createElement("input");
-  const yearInput = document.createElement("input");*/
-  
-  //const newInputsArray = [titleInput, plotInput, castInput, runtimeInput, ratingInput, yearInput]
+
   //populate with data and append to card
   submitButton.innerHTML = "Submit";
+  submitButton.type = "submit";
   newForm.appendChild(submitButton);
-  submitButton.setAttribute("onclick", "handleSubmit(this)");
+  newForm.classList.add("form");
+  newForm.addEventListener("submit", handleSubmit);
 
   editCard.appendChild(newForm);
   //remove old elements
   while (oldElements.length >0) oldElements[0].remove();
 }
 
-function handleSubmit() {
-
+function handleSubmit(e) {
+  e.preventDefault();
+  const allInputs = e.target;
+  const allInputsArray = []
+  let filmTitle = ""
+  for (let i = allInputs.length-1; i>= 0; i--){
+    
+    if (allInputs[i].classList == "input"){
+      allInputsArray.push(allInputs[i].value)
+      filmTitle = allInputs[i].id;
+    }
+  }
+  //loop this
+  movieData[filmTitle]["year"]= allInputsArray[0];
+  movieData[filmTitle]["rating"]= allInputsArray[1];
+  movieData[filmTitle]["runtime"]= allInputsArray[2];
+  movieData[filmTitle]["cast"]= allInputsArray[3];
+  movieData[filmTitle]["plot"]= allInputsArray[4];
+  console.log(movieData[filmTitle]);
+  
+  //function that transforms out of edit mode
+  finishedEdit()
 }
 
 function isSeen(seenBox) {
@@ -160,3 +178,5 @@ function isSeen(seenBox) {
     seenCard.style.backgroundColor = "var(--color1)";
   }
 }
+
+objectMapping();
