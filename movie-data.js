@@ -48,10 +48,10 @@ function objectMapping() {
     const newSeenButton = document.createElement("input");
     const newLabel = document.createElement("label");
     //putting in class and id fields
-    //
+    
     //Class fields
     const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear, newEditButton, newSeenButton, newLabel];
-    //the card is getting the movie title as its id and not class because we later want to remove other elements when editing
+    //the card is getting the movie title as its id and not class because we select all other elements for removal
     newCard.classList.add("card");
 
     for (const i in elementsArray){
@@ -103,35 +103,52 @@ objectMapping();
 
 function addingClass(element, movie) {
   //adds the title of the movie to the classlist without spaces
+  //called by objectMapping
   element.classList.add(movie.replace(/\s/g, ''))
 }
 
 
 function editButton(card) {
   //transforms to edit mode
+  //called by clicking the edit button on a card
   const button = document.getElementById("edit" + card.name);
   const editCard = document.getElementById(button.classList);
   const oldElements = document.getElementsByClassName(editCard.id);
   //generate new input fields and save button
-  const titleInput = document.createElement("input");
+  const newForm = document.createElement("form"); 
+  
+  const submitButton = document.createElement("button");
+  for (let i = 0; i < 6; i++){
+    newInput = document.createElement("input");
+    newInput.value = oldElements[i].innerHTML
+    newForm.appendChild(newInput);
+  }
+  /* const titleInput = document.createElement("input");
   const plotInput = document.createElement("input");
   const castInput = document.createElement("input");
   const runtimeInput = document.createElement("input");
   const ratingInput = document.createElement("input");
-  const yearInput = document.createElement("input");
-  const newInputsArray = [titleInput, plotInput, castInput, runtimeInput, ratingInput, yearInput]
+  const yearInput = document.createElement("input");*/
+  
+  //const newInputsArray = [titleInput, plotInput, castInput, runtimeInput, ratingInput, yearInput]
   //populate with data and append to card
-  for (const i in newInputsArray){
-    newInputsArray[i].value = oldElements[i].innerHTML
-    editCard.appendChild(newInputsArray[i]);
-  }
+  submitButton.innerHTML = "Submit";
+  newForm.appendChild(submitButton);
+  submitButton.setAttribute("onclick", "handleSubmit(this)");
+
+  editCard.appendChild(newForm);
   //remove old elements
   while (oldElements.length >0) oldElements[0].remove();
 }
 
+function handleSubmit() {
+
+}
 
 function isSeen(seenBox) {
   //function for changing the display when a film has been seen
+  //called by clicking the "seen" checkbox on a card
+  
   //identifies the correct checkbox by using the button's name field
   const seenButton = document.getElementById("seen" + seenBox.name);
   //identifies the corresponding card by using the checkbox's class field
