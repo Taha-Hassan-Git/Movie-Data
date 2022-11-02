@@ -124,12 +124,15 @@ function editButton(card) {
     } else {
       newInput = document.createElement("input");
     }
-      
-    br = document.createElement("br")
-    newInput.value = oldElements[i].innerHTML
-    newInput.name = inputNameArray[i];
+    label = document.createElement("label");
+    br = document.createElement("br");
+    label.for = inputNameArray[i];
+    label.innerHTML = inputNameArray[i].charAt(0).toUpperCase() + inputNameArray[i].slice(1);
+    newInput.value = oldElements[i].innerHTML;
+    newInput.name = card.name;
     newInput.classList.add("input");
-    newInput.id = card.name;
+    newInput.id = inputNameArray[i];
+    newForm.appendChild(label);
     newForm.appendChild(newInput);
     newForm.appendChild(br)
   }
@@ -155,7 +158,7 @@ function handleSubmit(e) {
     
     if (allInputs[i].classList == "input"){
       allInputsArray.push(allInputs[i].value)
-      filmTitle = allInputs[i].id;
+      filmTitle = allInputs[i].name;
     }
   }
   //loop this
