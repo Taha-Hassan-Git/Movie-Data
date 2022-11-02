@@ -118,9 +118,16 @@ function editButton(card) {
   const submitButton = document.createElement("button");
 
   for (let i = 0; i < 6; i++){
-    newInput = document.createElement("input");
+    inputNameArray = ["title", "plot", "cast", "runtime", "rating", "year"]
+    if (inputNameArray[i] === "plot" ||  inputNameArray[i] === "cast"){
+      newInput = document.createElement("textarea");
+    } else {
+      newInput = document.createElement("input");
+    }
+      
     br = document.createElement("br")
     newInput.value = oldElements[i].innerHTML
+    newInput.name = inputNameArray[i];
     newInput.classList.add("input");
     newInput.id = card.name;
     newForm.appendChild(newInput);

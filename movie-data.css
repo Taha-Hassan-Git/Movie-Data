@@ -44,11 +44,37 @@ body {
     display: block;
 }
 
+form {
+    word-wrap: break-word;
+    margin-top: 10px;
+    font-size: 25px;
+    padding: 20px;
+    width: inherit;
+    height: inherit;
+    border: dotted var(--color5);
+}
+
+.input {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    width: 100%;
+    background-color: inherit;
+    overflow-wrap: normal;
+    border: dotted var(--color5);
+}
+
 input[type='checkbox'] {
     height: 30px;
     width: 30px;
     margin-bottom: 10px;
     margin-left: 30px;
+}
+.input[name = "title"]{
+    font-weight: bold;
+}
+
+.input[name = "plot"] {
+    min-height: 150px;
 }
 
 button {
