@@ -155,7 +155,7 @@ function handleSubmit(e) {
   const allInputsArray = []
   let filmTitle = ""
   for (let i = allInputs.length-1; i>= 0; i--){
-    
+    console.log(allInputs[i]);
     if (allInputs[i].classList == "input"){
       allInputsArray.push(allInputs[i].value)
       filmTitle = allInputs[i].name;
@@ -167,10 +167,16 @@ function handleSubmit(e) {
   movieData[filmTitle]["runtime"]= allInputsArray[2];
   movieData[filmTitle]["cast"]= allInputsArray[3];
   movieData[filmTitle]["plot"]= allInputsArray[4];
-  console.log(movieData[filmTitle]);
+  movieData[allInputs[0].value] = movieData[filmTitle];
+  delete movieData[filmTitle];
+  console.log(movieData);
   
   //function that transforms out of edit mode
-  finishedEdit()
+  finishedEdit(movieData);
+}
+
+function finishedEdit(newData) {
+  console.log(newData)
 }
 
 function isSeen(seenBox) {
