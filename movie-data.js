@@ -165,7 +165,8 @@ function handleSubmit(e) {
     }
   }
 
-  const newKey = allInputs[0].value;
+  const newKey = allInputsArray[5];
+  console.log(allInputsArray[5]);
   //loop this
   movieData[filmTitle]["year"]= allInputsArray[0];
   movieData[filmTitle]["rating"]= allInputsArray[1];
@@ -175,9 +176,11 @@ function handleSubmit(e) {
   movieData[newKey] = movieData[filmTitle];
   delete movieData[filmTitle];
 
-  let submitMovieDataObj = [];
+  let submitMovieDataObj = {};
 
-  submitMovieDataObj.push(movieData[newKey]);
+  submitMovieDataObj[newKey] = movieData[newKey];
+
+  console.log(submitMovieDataObj);
   
   for (newMovie in submitMovieDataObj){
     objectMapping(newMovie, submitMovieDataObj);
