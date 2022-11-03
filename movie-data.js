@@ -34,69 +34,73 @@ let movieData = {
     },
   };
 
-function objectMapping() {
-  for (const movie in movieData){
-    //creating elements we need
-    const newCard = document.createElement("card");
-    const newTitle = document.createElement("h1");
-    const newSummary = document.createElement("p");
-    const newCast = document.createElement("p");
-    const newRuntime = document.createElement("p");
-    const newRating = document.createElement("p");
-    const newYear = document.createElement("p");
-    const newEditButton = document.createElement("button");
-    const newSeenButton = document.createElement("input");
-    const newLabel = document.createElement("label");
-    //putting in class and id fields
-    
-    //Class fields
-    const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear, newEditButton, newSeenButton, newLabel];
-    //the card is getting the movie title as its id and not class because we select all other elements for removal
-    newCard.classList.add("card");
+function objectMapping(movie, obj) {
+  //creating elements we need
+  const newCard = document.createElement("card");
+  const newTitle = document.createElement("h1");
+  const newSummary = document.createElement("p");
+  const newCast = document.createElement("p");
+  const newRuntime = document.createElement("p");
+  const newRating = document.createElement("p");
+  const newYear = document.createElement("p");
+  const newEditButton = document.createElement("button");
+  const newSeenButton = document.createElement("input");
+  const newLabel = document.createElement("label");
+  //putting in class and id fields
+  
+  //Class fields
+  //
+  //the card is getting the movie title as its id and not class because we select all other elements for removal when editing
+  newCard.classList.add("card");
 
-    for (const i in elementsArray){
-      addingClass(elementsArray[i], movie)
-    }
+  const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear, newEditButton, newSeenButton, newLabel];
 
-    // Adding id, name and for fields
-    newCard.id = movie.replace(/\s/g, '');
-    newTitle.id = "Title";
-    newSummary.id = "plot";
-    newCast.id = "cast";
-    newRuntime.id = "runtime";
-    newRating.id = "rating";
-    newYear.id = "year";
-    newEditButton.id = "edit" + movie;
-    newEditButton.name = movie;
-    newSeenButton.id = "seen" + movie;
-    newSeenButton.name = movie;
-    newSeenButton.type = "checkbox";
-    newLabel.for = "seen" + movie;
-
-    //adding onclick function to button and checkbox
-    newEditButton.setAttribute("onclick","editButton(this)");
-    newSeenButton.setAttribute("onclick", "isSeen(this)");
-
-    //setting the content of the elements
-    const title = movie;
-    newTitle.innerHTML = title;
-    newSummary.innerHTML = movieData[movie].plot;
-    newCast.innerHTML = movieData[movie].cast;
-    newRuntime.innerHTML = movieData[movie].runtime;
-    newRating.innerHTML = movieData[movie].rating;
-    newYear.innerHTML = movieData[movie].year;
-    newEditButton.innerHTML = "Edit";
-    newLabel.innerHTML = "Seen";
-
-    //appending elements to div
-    for (const i in elementsArray){
-      newCard.appendChild(elementsArray[i])
-    }
-    //appending to document
-    const movieSection = document.getElementById("moviesection");
-    const movies = document.getElementById("movies");
-    movieSection.insertBefore(newCard, movies);
+  for (const i in elementsArray){
+      addingClass(elementsArray[i], movie.replace(/\s/g, ''))
   }
+
+  // Adding id, name and for fields
+  newCard.id = movie.replace(/\s/g, '');
+  newTitle.id = "Title";
+  newSummary.id = "plot";
+  newCast.id = "cast";
+  newRuntime.id = "runtime";
+  newRating.id = "rating";
+  newYear.id = "year";
+  newEditButton.id = "edit" + movie;
+  newEditButton.name = movie;
+  newSeenButton.id = "seen" + movie;
+  newSeenButton.name = movie;
+  newSeenButton.type = "checkbox";
+  newLabel.for = "seen" + movie;
+
+  //adding onclick function to button and checkbox
+  newEditButton.setAttribute("onclick","editButton(this)");
+  newSeenButton.setAttribute("onclick", "isSeen(this)");
+
+  //setting the content of the elements
+  const title = movie;
+  newTitle.innerHTML = title;
+  newSummary.innerHTML = obj[movie].plot;
+  newCast.innerHTML = obj[movie].cast;
+  newRuntime.innerHTML = obj[movie].runtime;
+  newRating.innerHTML = obj[movie].rating;
+  newYear.innerHTML = obj[movie].year;
+  newEditButton.innerHTML = "Edit";
+  newLabel.innerHTML = "Seen";
+
+  //appending elements to div
+  for (const i in elementsArray){
+    newCard.appendChild(elementsArray[i])
+  }
+  //appending to document
+  const movieSection = document.getElementById("moviesection");
+  const movies = document.getElementById("movies");
+  movieSection.insertBefore(newCard, movies);
+}
+
+for (movie in movieData){
+  objectMapping(movie, movieData);
 }
 
 function addingClass(element, movie) {
@@ -155,28 +159,30 @@ function handleSubmit(e) {
   const allInputsArray = []
   let filmTitle = ""
   for (let i = allInputs.length-1; i>= 0; i--){
-    console.log(allInputs[i]);
     if (allInputs[i].classList == "input"){
       allInputsArray.push(allInputs[i].value)
       filmTitle = allInputs[i].name;
     }
   }
+
+  const newKey = allInputs[0].value;
   //loop this
   movieData[filmTitle]["year"]= allInputsArray[0];
   movieData[filmTitle]["rating"]= allInputsArray[1];
   movieData[filmTitle]["runtime"]= allInputsArray[2];
   movieData[filmTitle]["cast"]= allInputsArray[3];
   movieData[filmTitle]["plot"]= allInputsArray[4];
-  movieData[allInputs[0].value] = movieData[filmTitle];
+  movieData[newKey] = movieData[filmTitle];
   delete movieData[filmTitle];
-  console.log(movieData);
-  
-  //function that transforms out of edit mode
-  finishedEdit(movieData);
-}
 
-function finishedEdit(newData) {
-  console.log(newData)
+  let submitMovieDataObj = [];
+
+  submitMovieDataObj.push(movieData[newKey]);
+  
+  for (newMovie in submitMovieDataObj){
+    objectMapping(newMovie, submitMovieDataObj);
+  }
+  
 }
 
 function isSeen(seenBox) {
@@ -194,5 +200,3 @@ function isSeen(seenBox) {
     seenCard.style.backgroundColor = "var(--color1)";
   }
 }
-
-objectMapping();
