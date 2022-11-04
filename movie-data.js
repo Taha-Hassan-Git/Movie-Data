@@ -34,7 +34,7 @@ let movieData = {
     },
   };
 
-function objectMapping(movie, obj) {
+function objectMapping(movie, obj, appendDiv) {
   //creating elements we need
   const newCard = document.createElement("card");
   const newTitle = document.createElement("h1");
@@ -95,12 +95,12 @@ function objectMapping(movie, obj) {
   }
   //appending to document
   const movieSection = document.getElementById("moviesection");
-  const movies = document.getElementById("movies");
+  const movies = document.getElementById(appendDiv);
   movieSection.insertBefore(newCard, movies);
 }
 
 for (movie in movieData){
-  objectMapping(movie, movieData);
+  objectMapping(movie, movieData, "movies");
 }
 
 function addingClass(element, movie) {
@@ -116,10 +116,11 @@ function editButton(card) {
   const button = document.getElementById("edit" + card.name);
   const editCard = document.getElementById(button.classList);
   const oldElements = document.getElementsByClassName(editCard.id);
-  //generate new input fields and save button
-  
+  //generate new input fields and submit button
+  //I need to also add a cancel/back button
   const newForm = document.createElement("form"); 
   const submitButton = document.createElement("button");
+  const cancelButton = document.createElement("button");
 
   for (let i = 0; i < 6; i++){
     inputNameArray = ["title", "plot", "cast", "runtime", "rating", "year"]
@@ -140,17 +141,24 @@ function editButton(card) {
     newForm.appendChild(newInput);
     newForm.appendChild(br)
   }
-
-  //populate with data and append to card
-  submitButton.innerHTML = "Submit";
-  submitButton.type = "submit";
-  newForm.appendChild(submitButton);
-  newForm.classList.add("form");
-  newForm.addEventListener("submit", handleSubmit);
-
-  editCard.appendChild(newForm);
   //remove old elements
   while (oldElements.length >0) oldElements[0].remove();
+  //populate with data and append to card
+  cancelButton.innerHTML = "Cancel";
+  submitButton.innerHTML = "Submit";
+  cancelButton.type = "cancel";
+  submitButton.type = "submit";
+  
+  newForm.appendChild(submitButton);
+  newForm.addEventListener("submit", handleSubmit);
+  newForm.classList.add("form");
+
+  /* cancelButton.setAttribute("onclick","handleCancel(e)");
+  submitButton.setAttribute("submit", "handleSubmit()"); */
+
+  editCard.appendChild(newForm);
+  editCard.appendChild(cancelButton);
+  
 }
 
 function handleSubmit(e) {
@@ -164,9 +172,7 @@ function handleSubmit(e) {
       filmTitle = allInputs[i].name;
     }
   }
-
   const newKey = allInputsArray[5];
-  console.log(allInputsArray[5]);
   //loop this
   movieData[filmTitle]["year"]= allInputsArray[0];
   movieData[filmTitle]["rating"]= allInputsArray[1];
@@ -176,16 +182,25 @@ function handleSubmit(e) {
   movieData[newKey] = movieData[filmTitle];
   delete movieData[filmTitle];
 
+  
+  appendCard = filmTitle.replace(/\s/g, '');
+
+  removeCard = document.getElementById(filmTitle.replace(/\s/g, ''))
+
   let submitMovieDataObj = {};
 
   submitMovieDataObj[newKey] = movieData[newKey];
-
-  console.log(submitMovieDataObj);
   
   for (newMovie in submitMovieDataObj){
-    objectMapping(newMovie, submitMovieDataObj);
+    objectMapping(newMovie, submitMovieDataObj, appendCard);
   }
-  
+  // add a function to delete old elements
+  removeCard.remove();
+}
+
+function handleCancel(e) {
+  e.preventDefault();
+  console.log("hi");
 }
 
 function isSeen(seenBox) {
