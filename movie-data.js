@@ -148,10 +148,12 @@ function editButton(card) {
   submitButton.innerHTML = "Submit";
   cancelButton.type = "cancel";
   submitButton.type = "submit";
+  cancelButton.id = card.name;
   
   newForm.appendChild(submitButton);
+  
   newForm.addEventListener("submit", handleSubmit);
-  cancelButton.addEventListener("onclick", handleCancel);
+  cancelButton.addEventListener("click", handleCancel);
   newForm.classList.add("form");
 
   editCard.appendChild(newForm);
@@ -205,10 +207,17 @@ function handleSubmit(e) {
 }
 
 function handleCancel(e) {
-  //e.preventDefault();
-  console.log("hi");
+  button = e.target;
+  cancelAppend = button.id.replace(/\s/g, '');
+  cancelCard = document.getElementById(button.id.replace(/\s/g, ''))
+  let cancelMovieDataObj = {};
+  cancelMovieDataObj[button.id] = movieData[button.id];
+  console.log(cancelMovieDataObj);
+  for (cancelMovie in cancelMovieDataObj){
+    objectMapping(cancelMovie, cancelMovieDataObj, cancelAppend);
+  }
+  cancelCard.remove();
 }
-handleCancel()
 
 function isSeen(seenBox) {
   //function for changing the display when a film has been seen
