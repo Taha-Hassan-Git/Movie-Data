@@ -173,29 +173,33 @@ function handleSubmit(e) {
     }
   }
   const newKey = allInputsArray[5];
-  //loop this
-  movieData[filmTitle]["year"]= allInputsArray[0];
-  movieData[filmTitle]["rating"]= allInputsArray[1];
-  movieData[filmTitle]["runtime"]= allInputsArray[2];
-  movieData[filmTitle]["cast"]= allInputsArray[3];
-  movieData[filmTitle]["plot"]= allInputsArray[4];
-  movieData[newKey] = movieData[filmTitle];
-  delete movieData[filmTitle];
+  if (newKey !== filmTitle){
+    //loop this
+    movieData[filmTitle]["year"]= allInputsArray[0];
+    movieData[filmTitle]["rating"]= allInputsArray[1];
+    movieData[filmTitle]["runtime"]= allInputsArray[2];
+    movieData[filmTitle]["cast"]= allInputsArray[3];
+    movieData[filmTitle]["plot"]= allInputsArray[4];
+    movieData[newKey] = movieData[filmTitle];
+    delete movieData[filmTitle];
 
-  
-  appendCard = filmTitle.replace(/\s/g, '');
+    
+    appendCard = filmTitle.replace(/\s/g, '');
 
-  removeCard = document.getElementById(filmTitle.replace(/\s/g, ''))
+    removeCard = document.getElementById(filmTitle.replace(/\s/g, ''))
 
-  let submitMovieDataObj = {};
+    let submitMovieDataObj = {};
 
-  submitMovieDataObj[newKey] = movieData[newKey];
-  
-  for (newMovie in submitMovieDataObj){
-    objectMapping(newMovie, submitMovieDataObj, appendCard);
+    submitMovieDataObj[newKey] = movieData[newKey];
+    
+    for (newMovie in submitMovieDataObj){
+      objectMapping(newMovie, submitMovieDataObj, appendCard);
+    }
+    // add a function to delete old elements
+    removeCard.remove();
+  } else {
+    alert("Please change the Title before submitting")
   }
-  // add a function to delete old elements
-  removeCard.remove();
 }
 
 function handleCancel(e) {
