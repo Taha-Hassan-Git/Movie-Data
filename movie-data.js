@@ -151,10 +151,8 @@ function editButton(card) {
   
   newForm.appendChild(submitButton);
   newForm.addEventListener("submit", handleSubmit);
+  cancelButton.addEventListener("onclick", handleCancel);
   newForm.classList.add("form");
-
-  /* cancelButton.setAttribute("onclick","handleCancel(e)");
-  submitButton.setAttribute("submit", "handleSubmit()"); */
 
   editCard.appendChild(newForm);
   editCard.appendChild(cancelButton);
@@ -172,40 +170,45 @@ function handleSubmit(e) {
       filmTitle = allInputs[i].name;
     }
   }
-  const newKey = allInputsArray[5];
-  if (newKey !== filmTitle){
-    //loop this
-    movieData[filmTitle]["year"]= allInputsArray[0];
-    movieData[filmTitle]["rating"]= allInputsArray[1];
-    movieData[filmTitle]["runtime"]= allInputsArray[2];
-    movieData[filmTitle]["cast"]= allInputsArray[3];
-    movieData[filmTitle]["plot"]= allInputsArray[4];
-    movieData[newKey] = movieData[filmTitle];
-    delete movieData[filmTitle];
-
-    
-    appendCard = filmTitle.replace(/\s/g, '');
-
-    removeCard = document.getElementById(filmTitle.replace(/\s/g, ''))
-
-    let submitMovieDataObj = {};
-
-    submitMovieDataObj[newKey] = movieData[newKey];
-    
-    for (newMovie in submitMovieDataObj){
-      objectMapping(newMovie, submitMovieDataObj, appendCard);
-    }
-    // add a function to delete old elements
-    removeCard.remove();
-  } else {
-    alert("Please change the Title before submitting")
+  let newKey = allInputsArray[5];
+  
+  //hacky fix for the function not working if you keep the title
+  //the same. fix properly later.
+  if (newKey === filmTitle && newKey.charAt(newKey.length-1) !== " "){
+    newKey += " ";
+  } else if (newKey.endsWith(" ")) {
+    newKey = newKey.slice(0, -1);
   }
+  //loop this
+  movieData[filmTitle]["year"]= allInputsArray[0];
+  movieData[filmTitle]["rating"]= allInputsArray[1];
+  movieData[filmTitle]["runtime"]= allInputsArray[2];
+  movieData[filmTitle]["cast"]= allInputsArray[3];
+  movieData[filmTitle]["plot"]= allInputsArray[4];
+  movieData[newKey] = movieData[filmTitle];
+  delete movieData[filmTitle];
+
+  
+  appendCard = filmTitle.replace(/\s/g, '');
+
+  removeCard = document.getElementById(filmTitle.replace(/\s/g, ''))
+
+  let submitMovieDataObj = {};
+
+  submitMovieDataObj[newKey] = movieData[newKey];
+  
+  for (newMovie in submitMovieDataObj){
+    objectMapping(newMovie, submitMovieDataObj, appendCard);
+  }
+  // add a function to delete old elements
+  removeCard.remove();
 }
 
 function handleCancel(e) {
-  e.preventDefault();
+  //e.preventDefault();
   console.log("hi");
 }
+handleCancel()
 
 function isSeen(seenBox) {
   //function for changing the display when a film has been seen
