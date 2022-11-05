@@ -228,10 +228,10 @@ function isSeen(seenBox) {
   const seenCard = document.getElementById(seenButton.classList);
   //changes the background colour depending on whether the box is checked
   if (seenButton.checked == true){
-    seenCard.style.backgroundColor = "var(--color2)";
+    seenCard.style.backgroundColor = "var(--color1)";
     seenButton.checked = false;
   } else {
-    seenCard.style.backgroundColor = "var(--color1)";
+    seenCard.style.backgroundColor = "var(--color2)";
     seenButton.checked = true;
   }
 }
