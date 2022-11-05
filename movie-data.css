@@ -12,24 +12,6 @@ body {
     font-family: 'IBM Plex Mono', monospace;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-@media screen and (min-width: 40em) {
-    
-    .card {
-    flex: 0 1 calc(80% - 1em);
-    
-}
-}
-@media screen and (min-width: 50em) {
-    .card {
-        flex: 0 1 calc(50% - 1em);
-    }
-}
 
 .card {
     display: flex;
@@ -38,18 +20,22 @@ body {
     font-size: 20px;
     padding: 20px;
     background-color: var(--color1);
+    background-image: url(div-texture.jpg);
     margin-top: 20px;
     margin-right: 10px;
     margin-left: 10px;
     box-shadow: inset 10px 10px 35px -33px rgba(69,69,69,0.5), 10px 10px 35px -3px rgba(69,69,69,1);
     border-radius: 0.25rem;
-    filter: brightness(97%);
-    -webkit-filter: brightness(96%);
+    filter: brightness(100%);
+    -webkit-filter: brightness(100%);
+}
+.card::after{
+    
 }
 
 .card:hover {
-    filter: brightness(100%);
-    -webkit-filter: brightness(100%);
+    filter: brightness(102%);
+    -webkit-filter: brightness(102%);
 }
 
 form {
@@ -63,16 +49,27 @@ form {
 }
 
 h1 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 30px;
-    width: 100%;
+    position: relative;
+    margin-bottom: .25rem;
+    font-family: 'League Gothic';
     color: var(--color5);
+    font-size: 40px;
+    line-height: 1.0;
+    letter-spacing: -0.037em;
+    text-transform: uppercase;
     text-align: center;
-    font: 35px Helvetica, sans-serif;
+    background-color: var(--color5);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(245,245,245,0.5) 1px 1px 1px;
+    filter: saturate(200%), brightness(200%);
+    -webkit-filter: saturate(200%), brightness(200%);
 }
 
 p{
-    
+    text-shadow: 0px 1px 2px rgb(148, 148, 148);
 }
 
 .input {
@@ -82,12 +79,14 @@ p{
     font: inherit;
 }
 
-.input[name = "plot"] {
-    
+
+textarea{
+    min-height: 100px;
 }
 
 button {
-    opacity: 70%;
+    max-height: 35px;
+    opacity: 80%;
     flex: 1;
     display: inline-block;
     font: 25px 'IBM Plex Mono', monospace;
@@ -106,14 +105,75 @@ button {
     button:hover {
         outline: 1px outset gray;
     }
+button[type = "submit"]{
+    margin-top: 10px;
+}
 button[type = "cancel"]{
     align-self: center;
 }
 button[type = "seen"]{
-    align-self: flex-end;
-    font-size: 15px;
+    opacity: 100%;
+    align-self: center;
+    font-size: 20px;
     width: fit-content;
     background-color: inherit;
-    border: 2px dotted gray;
+    border: 3px dotted gray;
+    border-radius: 200rem;
+    -webkit-border-radius: 200rem;
+    -moz-border-radius: 200rem;
+    -ms-border-radius: 200rem;
+    -o-border-radius: 200rem;
 }
+
+button[type="add"]{
+    padding-top: 0px;
+    opacity: 98%;
+    font-size:xx-large;
+    height: 100px;
+    width: 100px;
+    background: rgb(223,181,123);
+    background: linear-gradient(90deg, rgba(223,181,123,1) 0%, rgba(240,197,136,1) 25%, rgba(232,192,135,1) 33%, rgba(231,186,123,1) 69%);
+}
+
+@media screen and (min-width: 40em) {
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+   }
+ 
+    .card {
+        flex: 0 1 calc(70% - 1em);
+    }
+}
+ 
+@media screen and (min-width: 60em) {
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+   }
+
+    .card {
+        flex: 0 1 calc(40% - 1em);
+     }
+}
+ 
+ 
+@media screen and (min-width: 70em) {
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+   }
+
+    .card {
+        margin-bottom: 50px;
+        margin-right: 50px;
+        margin-left: 50px;
+    }
+}
+nav {
+}
+
 

@@ -52,7 +52,7 @@ function objectMapping(movie, obj, appendDiv) {
   //the card is getting the movie title as its id and not class because we select all other elements for removal when editing
   newCard.classList.add("card");
 
-  const elementsArray = [newSeenButton, newTitle, newSummary, newCast, newRuntime, newRating, newYear, newEditButton];
+  const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear, newEditButton, newSeenButton];
 
   for (const i in elementsArray){
       addingClass(elementsArray[i], movie.replace(/\s/g, ''))
@@ -116,7 +116,6 @@ function editButton(card) {
   const editCard = document.getElementById(button.classList);
   const oldElements = document.getElementsByClassName(editCard.id);
   //generate new input fields and submit button
-  //I need to also add a cancel/back button
   const newForm = document.createElement("form"); 
   const submitButton = document.createElement("button");
   const cancelButton = document.createElement("button");
@@ -229,9 +228,59 @@ function isSeen(seenBox) {
   //changes the background colour depending on whether the box is checked
   if (seenButton.checked == true){
     seenCard.style.backgroundColor = "var(--color1)";
+    seenCard.style.backgroundImage = "url(div-texture.jpg)";
     seenButton.checked = false;
   } else {
     seenCard.style.backgroundColor = "var(--color2)";
+    seenCard.style.backgroundImage = "url(div-texture2.jpg)";
     seenButton.checked = true;
   }
+}
+
+function handleAdd(){
+  const newDiv = document.createElement("card");
+  const newForm = document.createElement("form"); 
+  const submitButton = document.createElement("button");
+  const cancelButton = document.createElement("button");
+
+  for (let i = 0; i < 6; i++){
+    inputNameArray = ["title", "plot", "cast", "runtime", "rating", "year"]
+    if (inputNameArray[i] === "plot" ||  inputNameArray[i] === "cast"){
+      newInput = document.createElement("textarea");
+    } else {
+      newInput = document.createElement("input");
+    }
+  label = document.createElement("label");
+  br = document.createElement("br");
+  label.for = inputNameArray[i];
+  label.innerHTML = inputNameArray[i].charAt(0).toUpperCase() + inputNameArray[i].slice(1);
+  newInput.name = "newfilm"
+  newInput.classList.add("input");
+  newInput.id = inputNameArray[i];
+  newForm.appendChild(label);
+  newForm.appendChild(newInput);
+  newForm.appendChild(br) 
+}
+  
+  cancelButton.innerHTML = "Cancel";
+  submitButton.innerHTML = "Submit";
+  cancelButton.type = "cancel";
+  submitButton.type = "submit";
+  cancelButton.id = "newfilm";
+  
+  newForm.appendChild(submitButton);
+  newForm.appendChild(cancelButton);
+  
+  newForm.addEventListener("submit", handleSubmit);
+  cancelButton.addEventListener("click", handleCancel);
+  newForm.classList.add("form");
+
+  newDiv.appendChild(newForm);
+  newDiv.classList.add("card");
+
+  toAppend = document.getElementById("moviedata");
+
+  const movieSection = document.getElementById("moviesection");
+  const movies = document.getElementById("moviedata");
+  movieSection.insertBefore(newDiv, movies);
 }
