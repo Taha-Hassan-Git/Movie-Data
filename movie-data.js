@@ -44,8 +44,7 @@ function objectMapping(movie, obj, appendDiv) {
   const newRating = document.createElement("p");
   const newYear = document.createElement("p");
   const newEditButton = document.createElement("button");
-  const newSeenButton = document.createElement("input");
-  const newLabel = document.createElement("label");
+  const newSeenButton = document.createElement("button");
   //putting in class and id fields
   
   //Class fields
@@ -53,7 +52,7 @@ function objectMapping(movie, obj, appendDiv) {
   //the card is getting the movie title as its id and not class because we select all other elements for removal when editing
   newCard.classList.add("card");
 
-  const elementsArray = [newTitle, newSummary, newCast, newRuntime, newRating, newYear, newEditButton, newSeenButton, newLabel];
+  const elementsArray = [newSeenButton, newTitle, newSummary, newCast, newRuntime, newRating, newYear, newEditButton];
 
   for (const i in elementsArray){
       addingClass(elementsArray[i], movie.replace(/\s/g, ''))
@@ -71,8 +70,9 @@ function objectMapping(movie, obj, appendDiv) {
   newEditButton.name = movie;
   newSeenButton.id = "seen" + movie;
   newSeenButton.name = movie;
-  newSeenButton.type = "checkbox";
-  newLabel.for = "seen" + movie;
+  newSeenButton.type = "seen";
+  newSeenButton.innerHTML = "Seen";
+  newSeenButton.checked = false;
 
   //adding onclick function to button and checkbox
   newEditButton.setAttribute("onclick","editButton(this)");
@@ -87,7 +87,6 @@ function objectMapping(movie, obj, appendDiv) {
   newRating.innerHTML = obj[movie].rating;
   newYear.innerHTML = obj[movie].year;
   newEditButton.innerHTML = "Edit";
-  newLabel.innerHTML = "Seen";
 
   //appending elements to div
   for (const i in elementsArray){
@@ -230,7 +229,9 @@ function isSeen(seenBox) {
   //changes the background colour depending on whether the box is checked
   if (seenButton.checked == true){
     seenCard.style.backgroundColor = "var(--color2)";
+    seenButton.checked = false;
   } else {
     seenCard.style.backgroundColor = "var(--color1)";
+    seenButton.checked = true;
   }
 }

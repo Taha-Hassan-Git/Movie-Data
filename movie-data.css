@@ -1,118 +1,119 @@
 :root {
-    --color1: #DFC7ED;
-    --color2: #C7EDD9;
-    --color3: #A19887;
-    --color4: #ECE7DE;
-    --color5: #a180b5;
+    --color1: #bad0e7;
+    --color2: #f0c588;
+    --color3: #ecdcd8;
+    --color4: #a87e61;
+    --color5: #b21111;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;0,700;1,100;1,200;1,400&family=Roboto:wght@700&display=swap');
+
 body {
-    background: var(--color4);
+    font-family: 'IBM Plex Mono', monospace;
 }
 
 .container {
     display: flex;
-    justify-content: space-evenly;
-    flex-flow: row;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 10px 30px;
-    align-items: center;
+}
+
+@media screen and (min-width: 40em) {
+    
+    .card {
+    flex: 0 1 calc(80% - 1em);
+    
+}
+}
+@media screen and (min-width: 50em) {
+    .card {
+        flex: 0 1 calc(50% - 1em);
+    }
 }
 
 .card {
-    word-wrap: break-word;
-    margin-top: 10px;
-    font-size: 25px;
-    font-family: 'Courier New', Courier, monospace;
-    background-color: var(--color1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 20px;
     padding: 20px;
-    border: 2px solid black;
-    border-radius: 5%;
-    box-shadow: 5px 5px 5px;
-    -webkit-border-radius: 5%;
-    -moz-border-radius: 5%;
-    -ms-border-radius: 5%;
-    -o-border-radius: 5%;
-    
+    background-color: var(--color1);
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    box-shadow: inset 10px 10px 35px -33px rgba(69,69,69,0.5), 10px 10px 35px -3px rgba(69,69,69,1);
+    border-radius: 0.25rem;
+    filter: brightness(97%);
+    -webkit-filter: brightness(96%);
 }
 
 .card:hover {
-    outline: #A19887 solid 10px;
-}
-
-.moviedata {
-    display: block;
+    filter: brightness(100%);
+    -webkit-filter: brightness(100%);
 }
 
 form {
-    word-wrap: break-word;
-    margin-top: 10px;
-    font-size: 25px;
-    padding: 20px;
-    width: inherit;
-    height: inherit;
-    border: dotted var(--color5);
+    background-color: inherit;
+    min-width: 400px;
+    margin-top: 20px;
+    margin-right: 20px;
+    filter: contrast(95%);
+    border-radius: 0.25rem;
+    -webkit-filter: contrast(95%);
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    width: 100%;
+    color: var(--color5);
+    text-align: center;
+    font: 35px Helvetica, sans-serif;
+}
+
+p{
+    
 }
 
 .input {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 25px;
     width: 100%;
     background-color: inherit;
-    overflow-wrap: normal;
-    border: dotted var(--color5);
-}
-
-input[type='checkbox'] {
-    height: 30px;
-    width: 30px;
-    margin-bottom: 10px;
-    margin-left: 30px;
-}
-.input[name = "title"]{
-    font-weight: bold;
+    border: 1px dotted var(--color5);
+    font: inherit;
 }
 
 .input[name = "plot"] {
-    min-height: 150px;
+    
 }
 
 button {
-    background-color: var(--color4);
-    border: 2px solid black;
-    color: black;
-    padding: 5px 8px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 25px;
-    margin-bottom: 10px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 10%;
-    -webkit-border-radius: 10%;
-    -moz-border-radius: 10%;
-    -ms-border-radius: 10%;
-    -o-border-radius: 10%;
-  }
+    opacity: 70%;
+    flex: 1;
+    display: inline-block;
+    font: 25px 'IBM Plex Mono', monospace;
+    background-color: var(--color3);
+    width: 20%;
+    min-width: fit-content;
+    border: 2px inset black;
+    border-radius: 0.25rem;
+    -webkit-border-radius: 0.25rem;
+    -moz-border-radius: 0.25rem;
+    -ms-border-radius: 0.25rem;
+    -o-border-radius: 0.25rem;
+    -webkit-filter: saturate(100%);
+}
   
-    button:hover:enabled {
-        background-color: var(--color2);
-        padding: 8px 17px;
+    button:hover {
+        outline: 1px outset gray;
     }
-    button:disabled {
-        background-color: var(--color1);
-
-    }
-
-@media only screen and (max-width: 800px) {
-    .card {
-        max-width: 80%;
-    }
-   
+button[type = "cancel"]{
+    align-self: center;
+}
+button[type = "seen"]{
+    align-self: flex-end;
+    font-size: 15px;
+    width: fit-content;
+    background-color: inherit;
+    border: 2px dotted gray;
 }
 
-@media screen and (min-width: 801px) {
-    .card {
-        max-width: 600px;
-    }
-}
