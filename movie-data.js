@@ -254,7 +254,8 @@ function handleAdd(){
   br = document.createElement("br");
   label.for = inputNameArray[i];
   label.innerHTML = inputNameArray[i].charAt(0).toUpperCase() + inputNameArray[i].slice(1);
-  newInput.name = "newfilm"
+  newInput.name = "new"
+  newInput.required = true;
   newInput.classList.add("input");
   newInput.id = inputNameArray[i];
   newForm.appendChild(label);
@@ -266,21 +267,59 @@ function handleAdd(){
   submitButton.innerHTML = "Submit";
   cancelButton.type = "cancel";
   submitButton.type = "submit";
-  cancelButton.id = "newfilm";
+  cancelButton.id = "new";
   
   newForm.appendChild(submitButton);
   newForm.appendChild(cancelButton);
   
-  newForm.addEventListener("submit", handleSubmit);
-  cancelButton.addEventListener("click", handleCancel);
+  newForm.addEventListener("submit", handleAddSubmit);
+  cancelButton.addEventListener("click", handleAddCancel);
   newForm.classList.add("form");
 
   newDiv.appendChild(newForm);
   newDiv.classList.add("card");
+  newDiv.id = "newfilm"
 
   toAppend = document.getElementById("moviedata");
 
   const movieSection = document.getElementById("moviesection");
   const movies = document.getElementById("moviedata");
   movieSection.insertBefore(newDiv, movies);
+}
+function handleAddSubmit(e){
+  e.preventDefault();
+  const allInputs = e.target;
+  const allInputsArray = []
+  for (let i = allInputs.length-1; i>= 0; i--){
+    if (allInputs[i].classList == "input"){
+      allInputsArray.push(allInputs[i].value)
+    }
+  }
+  let newKey = allInputsArray[5];
+  //loop this
+  movieData[newKey] = {}
+  movieData[newKey]["year"]= allInputsArray[0];
+  movieData[newKey]["rating"]= allInputsArray[1];
+  movieData[newKey]["runtime"]= allInputsArray[2];
+  movieData[newKey]["cast"]= allInputsArray[3];
+  movieData[newKey]["plot"]= allInputsArray[4];
+
+  appendCard = document.getElementById("moviesection");
+
+  removeCard = document.getElementById("newfilm");
+
+  let submitMovieDataObj = {};
+
+  submitMovieDataObj[newKey] = movieData[newKey];
+  
+  for (newMovie in submitMovieDataObj){
+    objectMapping(newMovie, submitMovieDataObj, appendCard);
+  }
+  // add a function to delete old elements
+  removeCard.remove();
+}
+
+function handleAddCancel(){
+  cancelDiv = document.getElementById("newfilm");
+  cancelDiv.remove();
 }
