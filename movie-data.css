@@ -17,11 +17,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    font-size: 20px;
+    font-size: 14px;
     padding: 20px;
     background-color: var(--color1);
     background-image: url(div-texture.jpg);
     margin-top: 20px;
+    margin-bottom: 20px;
     margin-right: 10px;
     margin-left: 10px;
     box-shadow: inset 10px 10px 35px -33px rgba(69,69,69,0.5), 10px 10px 35px -3px rgba(69,69,69,1);
@@ -29,18 +30,15 @@ body {
     filter: brightness(100%);
     -webkit-filter: brightness(100%);
 }
-.card::after{
-    
-}
 
 .card:hover {
-    filter: brightness(102%);
-    -webkit-filter: brightness(102%);
+    filter: brightness(105%);
+    -webkit-filter: brightness(105%);
 }
 
 form {
     background-color: inherit;
-    min-width: 400px;
+    min-width: auto;
     margin-top: 20px;
     margin-right: 20px;
     filter: contrast(95%);
@@ -53,7 +51,7 @@ h1 {
     margin-bottom: .25rem;
     font-family: 'League Gothic';
     color: var(--color5);
-    font-size: 40px;
+    font-size: 25px;
     line-height: 1.0;
     letter-spacing: -0.037em;
     text-transform: uppercase;
@@ -89,7 +87,7 @@ button {
     opacity: 80%;
     flex: 1;
     display: inline-block;
-    font: 25px 'IBM Plex Mono', monospace;
+    font: inherit;
     background-color: var(--color3);
     width: 20%;
     min-width: fit-content;
@@ -114,7 +112,7 @@ button[type = "cancel"]{
 button[type = "seen"]{
     opacity: 100%;
     align-self: center;
-    font-size: 20px;
+    font: inherit;
     width: fit-content;
     background-color: inherit;
     border: 3px dotted gray;
@@ -144,6 +142,7 @@ button[type="add"]{
  
     .card {
         flex: 0 1 calc(70% - 1em);
+        
     }
 }
  
@@ -171,6 +170,10 @@ button[type="add"]{
         margin-bottom: 50px;
         margin-right: 50px;
         margin-left: 50px;
+        font-size: 19px;
+    }
+    h1{
+        font-size: 40px;
     }
 }
 nav {
