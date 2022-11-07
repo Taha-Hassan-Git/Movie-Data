@@ -81,11 +81,11 @@ function objectMapping(movie, obj, appendDiv) {
   //setting the content of the elements
   const title = movie;
   newTitle.innerHTML = title;
-  newSummary.innerHTML = obj[movie].plot;
-  newCast.innerHTML = obj[movie].cast;
-  newRuntime.innerHTML = obj[movie].runtime;
-  newRating.innerHTML = obj[movie].rating;
-  newYear.innerHTML = obj[movie].year;
+  newSummary.innerHTML = "Plot Summary:<br>" + obj[movie].plot;
+  newCast.innerHTML = "Cast:<br>" + obj[movie].cast;
+  newRuntime.innerHTML = "Runtime: " + obj[movie].runtime;
+  newRating.innerHTML = "Rating: " + obj[movie].rating;
+  newYear.innerHTML = "Released: " + obj[movie].year;
   newEditButton.innerHTML = "Edit";
 
   //appending elements to div
@@ -115,6 +115,8 @@ function editButton(card) {
   const button = document.getElementById("edit" + card.name);
   const editCard = document.getElementById(button.classList);
   const oldElements = document.getElementsByClassName(editCard.id);
+  cleanOldElements(oldElements)
+
   //generate new input fields and submit button
   const newForm = document.createElement("form"); 
   const submitButton = document.createElement("button");
@@ -158,7 +160,16 @@ function editButton(card) {
   editCard.appendChild(cancelButton);
   
 }
+function cleanOldElements(oldElements){
+  const removeAmmountArray = [17, 9, 9, 8, 10]
 
+  for (let i = 1; i < 5; i++){
+    console.log(oldElements[i]);
+    newText = oldElements[i].innerHTML.substring(removeAmmountArray[i-1]);
+    oldElements[i].innerHTML = newText;
+  }
+  
+}
 function handleSubmit(e) {
   e.preventDefault();
   const allInputs = e.target;
@@ -210,7 +221,6 @@ function handleCancel(e) {
   cancelCard = document.getElementById(button.id.replace(/\s/g, ''))
   let cancelMovieDataObj = {};
   cancelMovieDataObj[button.id] = movieData[button.id];
-  console.log(cancelMovieDataObj);
   for (cancelMovie in cancelMovieDataObj){
     objectMapping(cancelMovie, cancelMovieDataObj, cancelAppend);
   }
