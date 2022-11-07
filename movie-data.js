@@ -327,6 +327,9 @@ function handleAddSubmit(e){
   }
   // add a function to delete old elements
   removeCard.remove();
+  scrollElement = document.getElementById(Object.keys(submitMovieDataObj)[0].replace(/\s/g, ''));
+  console.log(scrollElement);
+  scrollElement.scrollIntoView({ behavior: 'smooth', block: 'end'});
 }
 
 function handleAddCancel(){
