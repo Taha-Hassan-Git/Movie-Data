@@ -69,7 +69,7 @@ h1 {
 }
 
 p{
-    text-shadow: 0px 1px 2px rgb(148, 148, 148);
+    text-shadow: 1px 1px 2px rgb(148, 148, 148);
 }
 
 .input {
@@ -128,11 +128,17 @@ button[type = "seen"]{
 button[type="add"]{
     padding-top: 0px;
     opacity: 98%;
-    font-size:xx-large;
-    height: 100px;
-    width: 100px;
-    background: rgb(223,181,123);
-    background: linear-gradient(90deg, rgba(223,181,123,1) 0%, rgba(240,197,136,1) 25%, rgba(232,192,135,1) 33%, rgba(231,186,123,1) 69%);
+    font-size:x-large;
+    text-shadow: 0px 1px 2px rgb(148, 148, 148);
+    height: fit-content;
+    width: fit-content;
+    outline: outset 2px var(--color4);
+    border: none;
+    background: var(--color2);
+    background-image: url(button-texture.jpg);
+}
+button[type="add"]:hover{
+    outline: inset 1px var(--color4);
 }
 
 @media screen and (min-width: 40em) {
@@ -178,7 +184,19 @@ button[type="add"]{
         font-size: 40px;
     }
 }
-nav {
-}
 
+#buttoncard {
+    width: 15%;
+    height: fit-content;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
 

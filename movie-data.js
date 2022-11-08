@@ -164,7 +164,6 @@ function cleanOldElements(oldElements){
   const removeAmmountArray = [17, 9, 9, 8, 10]
 
   for (let i = 1; i < 5; i++){
-    console.log(oldElements[i]);
     newText = oldElements[i].innerHTML.substring(removeAmmountArray[i-1]);
     oldElements[i].innerHTML = newText;
   }
@@ -242,7 +241,7 @@ function isSeen(seenBox) {
     seenButton.checked = false;
   } else {
     seenCard.style.backgroundColor = "var(--color2)";
-    seenCard.style.backgroundImage = "url(div-texture2.jpg)";
+    seenCard.style.backgroundImage = "url(div-texture2.jpeg)";
     seenButton.checked = true;
   }
 }
@@ -328,7 +327,6 @@ function handleAddSubmit(e){
   // add a function to delete old elements
   removeCard.remove();
   scrollElement = document.getElementById(Object.keys(submitMovieDataObj)[0].replace(/\s/g, ''));
-  console.log(scrollElement);
   scrollElement.scrollIntoView({ behavior: 'smooth', block: 'end'});
 }
 
