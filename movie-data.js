@@ -163,8 +163,9 @@ function editButton(card) {
 function cleanOldElements(oldElements){
   const removeAmmountArray = [17, 9, 9, 8, 10]
 
-  for (let i = 1; i < 5; i++){
+  for (let i = 1; i < 6; i++){
     newText = oldElements[i].innerHTML.substring(removeAmmountArray[i-1]);
+    console.log(newText);
     oldElements[i].innerHTML = newText;
   }
   
