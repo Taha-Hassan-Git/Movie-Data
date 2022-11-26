@@ -19,6 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    max-width: 650px;
     font-size: 14px;
     padding: 20px;
     background-color: var(--color1);
@@ -70,6 +71,7 @@ h1 {
 
 p{
     text-shadow: 1px 1px 2px rgb(148, 148, 148);
+    font-size: 18px;
 }
 
 .input {
@@ -99,6 +101,7 @@ button {
     -moz-border-radius: 0.25rem;
     -ms-border-radius: 0.25rem;
     -o-border-radius: 0.25rem;
+    filter: saturate(100%);
     -webkit-filter: saturate(100%);
 }
   
@@ -181,7 +184,10 @@ button[type="add"]:hover{
         font-size: 19px;
     }
     h1{
-        font-size: 40px;
+        font-size: 50px;
+    }
+    p{
+        font-size: 25px;
     }
 }
 
